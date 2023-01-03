@@ -42,8 +42,10 @@ const App=() =>{
               ...enteredExpenseData,
               id:Math.random().toString()
            }
-           const updatedExpense=[expense,...expenses]
-           setExpensesData(updatedExpense);
+           //const updatedExpense=[expense,...expenses]
+           setExpensesData((prevExpense)=>{
+            return[expense,...prevExpense];
+           });
            console.log(updatedExpense);
 
        };
