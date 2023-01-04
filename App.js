@@ -35,7 +35,8 @@ const DUMMY_EXPENSE = [
 
 const App=() =>{
 
-        const [expenses,setExpensesData]=useState(DUMMY_EXPENSE);
+  const[isEditing,setisEditing]=useState(false);
+  const [expenses,setExpensesData]=useState(DUMMY_EXPENSE);
      
        const saveExpenseDataHandeler=(enteredExpenseData)=>{
            const expense={
@@ -46,16 +47,23 @@ const App=() =>{
            setExpensesData((prevExpense)=>{
             return[expense,...prevExpense];
            });
-           console.log(updatedExpense);
+           //console.log(updatedExpense);
 
        };
-     
+     const startEditingHandeler=()=>{
+      setisEditing(true);
+     };
+     const stopEditingHandeler=()=>{
+      setisEditing(false);
+
+     };
 
   return (
     <div>
          
-      <ExpenseForm onSaveExpenseData={saveExpenseDataHandeler}></ExpenseForm>
-      <Expenses expenses={expenses}/>
+     {!isEditing&& <button className="contain1" onClick={startEditingHandeler}> add new expense</button>}
+     {isEditing &&<ExpenseForm onSaveExpenseData={saveExpenseDataHandeler} onCancel={stopEditingHandeler} ></ExpenseForm>}
+      <Expenses items={expenses}/>
       
       
 
